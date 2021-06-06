@@ -14,7 +14,7 @@ public interface IStudentService {
 
 	Student createStudent(RequestCreateStudent createStudentRequest);
 
-	Student updateStudent(RequestCreateStudent createStudentRequest);
+	Student updateStudent(RequestCreateStudent createStudentRequest, Long id);
 
 	Iterable<Student> searchStudent(SearchType type, String value);
 

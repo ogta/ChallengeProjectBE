@@ -50,9 +50,9 @@ public class StudentController {
 		return new ResponseEntity<Student>(studentService.createStudent(student), HttpStatus.CREATED);
 	}
 
-	@PutMapping("/")
-	public ResponseEntity<Student> updateCustomer(@RequestBody RequestCreateStudent student) {
-		return new ResponseEntity<Student>(studentService.updateStudent(student), HttpStatus.CREATED);
+	@PutMapping("/{id}")
+	public ResponseEntity<Student> updateCustomer(@PathVariable("id") final long id, @RequestBody RequestCreateStudent student) {
+		return new ResponseEntity<Student>(studentService.updateStudent(student, id), HttpStatus.CREATED);
 	}
 
 	@GetMapping("/search/{type}/{value}")
@@ -68,7 +68,7 @@ public class StudentController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Student> deleteStudent(@PathVariable("id") final long id) {
+	public ResponseEntity<Student> deleteStudent(@PathVariable("id") final Long id) {
 		studentService.deleteStudent(id);
 		return new ResponseEntity<Student>(HttpStatus.OK);
 	}

@@ -41,7 +41,9 @@ public class StudentService implements IStudentService {
 	public Student createStudent(RequestCreateStudent createStudentRequest) {
 
 		Student student = mapRequestToEntity(createStudentRequest);
-
+		System.out.println(createStudentRequest.getCityId());
+		System.out.println(createStudentRequest.getTownId());
+		
 		Optional<Town> town = townRepository.findById(createStudentRequest.getTownId());
 		Optional<City> city = cityRepository.findById(createStudentRequest.getCityId());
 
@@ -52,9 +54,9 @@ public class StudentService implements IStudentService {
 	}
 
 	@Override
-	public Student updateStudent(RequestCreateStudent createStudentRequest) {
+	public Student updateStudent(RequestCreateStudent createStudentRequest, Long id) {
 
-		Student student = studentRepository.findById(createStudentRequest.getStudentId()).get();
+		Student student = studentRepository.findById(id).get();
 
 		if (createStudentRequest.getCityId() != null
 				&& !student.getCity().getCityId().equals(createStudentRequest.getCityId())) {
@@ -97,7 +99,7 @@ public class StudentService implements IStudentService {
 	public Iterable<Student> searchStudent(SearchType type, String value) {
 
 		if (type.equals(SearchType.IDENTITY_NUMBER)) {
-			return studentRepository.findByIdentityNumber(value);
+			return studentRepository.findByIdentityNumber(Long.valueOf(value));
 		} else if (type.equals(SearchType.CITY)) {
 			return studentRepository.findByCityName(value);
 		} else if (type.equals(SearchType.TOWN)) {

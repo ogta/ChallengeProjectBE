@@ -17,6 +17,6 @@ public interface IStudentRepository extends CrudRepository<Student, Long> {
 	
 	Iterable<Student> findByPhoneNumberContainingIgnoreCase(String phone);
 	
-	Iterable<Student> findByIdentityNumber(String identityNumber);
+	Iterable<Student> findByIdentityNumber(Long identityNumber);
 	
 }
